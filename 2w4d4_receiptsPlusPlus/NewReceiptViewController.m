@@ -7,31 +7,131 @@
 //
 
 #import "NewReceiptViewController.h"
+#import "AppDelegate.h"
+#import "Receipt+CoreDataClass.h"
+#import "Tag+CoreDataClass.h"
 
-@interface NewReceiptViewController ()
+@interface NewReceiptViewController ()<UITextFieldDelegate, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *amountTextField;
+@property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSArray *receiptsArray;
+@property (strong, nonatomic) NSArray *tagsArray;
 
 @end
 
 @implementation NewReceiptViewController
 
-- (void)viewDidLoad {
+#pragma mark - AppDelegate (Context)
+
+- (AppDelegate*)appDelegate
+{
+    return (AppDelegate*)[[UIApplication sharedApplication] delegate];
+}
+
+- (NSPersistentContainer*)getContainer
+{
+    return [self appDelegate].persistentContainer;
+}
+
+- (NSManagedObjectContext*)getContext
+{
+    return [self getContainer].viewContext;
+}
+
+#pragma mark - ViewDidLoad
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.receiptsArray = @[];
+    self.tagsArray = @[];
+    self.amountTextField.delegate = self;
+    self.descriptionTextField.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Add New Objects
+
+- (IBAction)addButtonTapped:(UIButton *)sender
+{
+    [self saveReceipt];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)saveReceipt
+{
+    if (_amountTextField.text.length == 0 && _descriptionTextField.text.length == 0)
+    {
+        NSLog(@"Book name is empty");
+        return;
+    }
+    NSManagedObjectContext *context = [self getContext];
+    Receipt *receipt = [NSEntityDescription insertNewObjectForEntityForName:@"Receipt" inManagedObjectContext:context];
+    receipt.amount = [NSDecimalNumber decimalNumberWithString:self.amountTextField.text];
+    receipt.note = self.descriptionTextField.text;
+    receipt.timeStamp = self.datePicker.date;
+    
+    [[self appDelegate] saveContext];
 }
-*/
+
+
+- (IBAction)cancelButtonTapped:(UIButton *)sender
+{
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self cancelReceipt];
+}
+
+- (void)cancelReceipt
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - TableView
+
+
+
+#pragma mark - Keyboard
+
+// open keyboard & selector: to call keyboardWillShow method to move view up
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    // register notification (UIKeyboardWillShowNotification opens keyboard)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    return YES;
+}
+
+// also use delegate to close keyboard and save receipt when return button is hit in the keyboard
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    // endEditing closes keyboard when it resigns first responder
+    [self.view endEditing:YES];
+    // saveReceipt with return key
+    [self saveReceipt];
+    return YES;
+}
+
+// move view up to make room for keyboard (called by notification selector:)
+- (void)keyboardWillShow:(NSNotificationCenter*)notification
+{
+    
+}
+
+// move view down when keyboard is hidden (called by notification selector:)
+- (void)keyboardWillHide:(NSNotificationCenter*)notification
+{
+    [self cancelReceipt];
+}
+
+// CUSTOM TOUCH DETECTION to resign first responder
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.amountTextField resignFirstResponder];
+    [self.descriptionTextField resignFirstResponder];
+    [self.datePicker resignFirstResponder];
+}
 
 @end

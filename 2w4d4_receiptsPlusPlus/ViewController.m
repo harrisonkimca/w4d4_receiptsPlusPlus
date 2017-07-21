@@ -7,23 +7,92 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
+#import "Receipt+CoreDataClass.h"
+#import "NewReceiptViewController.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray<Receipt*>*receiptsArray;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+#pragma mark - AppDelegate (Context)
+
+- (AppDelegate*)appDelegate
+{
+    return (AppDelegate*)[[UIApplication sharedApplication] delegate];
+}
+
+- (NSPersistentContainer*)getContainer
+{
+    return [self appDelegate].persistentContainer;
+}
+
+- (NSManagedObjectContext*)getContext
+{
+    return [self getContainer].viewContext;
+}
+
+#pragma mark - ViewDidLoad
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.receiptsArray = @[];
+    self.tableView.dataSource = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self fetchReceipt];
+    [self.tableView reloadData];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Fetch (Populate TableView)
+
+- (void)fetchReceipt
+{
+    NSFetchRequest *request = [Receipt fetchRequest];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"timeStamp" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+    
+    NSManagedObjectContext *context = [self getContext];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    
+    if (error != nil)
+    {
+        NSLog(@"@%@", error.localizedDescription);
+    }
+    else
+    {
+        self.receiptsArray = result;
+        [self.tableView reloadData];
+    }
 }
 
+#pragma mark - TableView (Datasource & Display Data)
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    return self.receiptsArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    Receipt *receipt = self.receiptsArray[indexPath.row];
+    cell.textLabel.text = receipt.note;
+    return cell;
+}
 
 @end
