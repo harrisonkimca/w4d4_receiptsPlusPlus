@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		886508691F219F4500168AF7 /* Tag+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 886508621F219F4500168AF7 /* Tag+CoreDataClass.m */; };
+		8865086A1F219F4500168AF7 /* Tag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 886508641F219F4500168AF7 /* Tag+CoreDataProperties.m */; };
+		8865086B1F219F4500168AF7 /* Receipt+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 886508661F219F4500168AF7 /* Receipt+CoreDataClass.m */; };
+		8865086C1F219F4500168AF7 /* Receipt+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 886508681F219F4500168AF7 /* Receipt+CoreDataProperties.m */; };
+		8865086F1F219FF700168AF7 /* NewReceiptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8865086E1F219FF700168AF7 /* NewReceiptViewController.m */; };
 		88FF86F81F21779400F8084F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF86F71F21779400F8084F /* main.m */; };
 		88FF86FB1F21779400F8084F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF86FA1F21779400F8084F /* AppDelegate.m */; };
 		88FF86FE1F21779400F8084F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF86FD1F21779400F8084F /* ViewController.m */; };
@@ -28,6 +33,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		886508611F219F4500168AF7 /* Tag+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tag+CoreDataClass.h"; sourceTree = "<group>"; };
+		886508621F219F4500168AF7 /* Tag+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tag+CoreDataClass.m"; sourceTree = "<group>"; };
+		886508631F219F4500168AF7 /* Tag+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tag+CoreDataProperties.h"; sourceTree = "<group>"; };
+		886508641F219F4500168AF7 /* Tag+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tag+CoreDataProperties.m"; sourceTree = "<group>"; };
+		886508651F219F4500168AF7 /* Receipt+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Receipt+CoreDataClass.h"; sourceTree = "<group>"; };
+		886508661F219F4500168AF7 /* Receipt+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Receipt+CoreDataClass.m"; sourceTree = "<group>"; };
+		886508671F219F4500168AF7 /* Receipt+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Receipt+CoreDataProperties.h"; sourceTree = "<group>"; };
+		886508681F219F4500168AF7 /* Receipt+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Receipt+CoreDataProperties.m"; sourceTree = "<group>"; };
+		8865086D1F219FF700168AF7 /* NewReceiptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewReceiptViewController.h; sourceTree = "<group>"; };
+		8865086E1F219FF700168AF7 /* NewReceiptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewReceiptViewController.m; sourceTree = "<group>"; };
 		88FF86F31F21779400F8084F /* 2w4d4_receiptsPlusPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2w4d4_receiptsPlusPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88FF86F71F21779400F8084F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		88FF86F91F21779400F8084F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -65,6 +80,14 @@
 		88FF86EA1F21779400F8084F = {
 			isa = PBXGroup;
 			children = (
+				886508611F219F4500168AF7 /* Tag+CoreDataClass.h */,
+				886508621F219F4500168AF7 /* Tag+CoreDataClass.m */,
+				886508631F219F4500168AF7 /* Tag+CoreDataProperties.h */,
+				886508641F219F4500168AF7 /* Tag+CoreDataProperties.m */,
+				886508651F219F4500168AF7 /* Receipt+CoreDataClass.h */,
+				886508661F219F4500168AF7 /* Receipt+CoreDataClass.m */,
+				886508671F219F4500168AF7 /* Receipt+CoreDataProperties.h */,
+				886508681F219F4500168AF7 /* Receipt+CoreDataProperties.m */,
 				88FF86F51F21779400F8084F /* 2w4d4_receiptsPlusPlus */,
 				88FF87121F21779500F8084F /* 2w4d4_receiptsPlusPlusTests */,
 				88FF86F41F21779400F8084F /* Products */,
@@ -85,6 +108,8 @@
 			children = (
 				88FF86F91F21779400F8084F /* AppDelegate.h */,
 				88FF86FA1F21779400F8084F /* AppDelegate.m */,
+				8865086D1F219FF700168AF7 /* NewReceiptViewController.h */,
+				8865086E1F219FF700168AF7 /* NewReceiptViewController.m */,
 				88FF86FC1F21779400F8084F /* ViewController.h */,
 				88FF86FD1F21779400F8084F /* ViewController.m */,
 				88FF86FF1F21779400F8084F /* Main.storyboard */,
@@ -216,9 +241,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8865086A1F219F4500168AF7 /* Tag+CoreDataProperties.m in Sources */,
+				8865086F1F219FF700168AF7 /* NewReceiptViewController.m in Sources */,
 				88FF86FE1F21779400F8084F /* ViewController.m in Sources */,
 				88FF86FB1F21779400F8084F /* AppDelegate.m in Sources */,
+				8865086B1F219F4500168AF7 /* Receipt+CoreDataClass.m in Sources */,
 				88FF86F81F21779400F8084F /* main.m in Sources */,
+				886508691F219F4500168AF7 /* Tag+CoreDataClass.m in Sources */,
+				8865086C1F219F4500168AF7 /* Receipt+CoreDataProperties.m in Sources */,
 				88FF87041F21779400F8084F /* _w4d4_receiptsPlusPlus.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +448,7 @@
 				88FF871A1F21779500F8084F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88FF871B1F21779500F8084F /* Build configuration list for PBXNativeTarget "2w4d4_receiptsPlusPlusTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +457,7 @@
 				88FF871D1F21779500F8084F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
